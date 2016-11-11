@@ -2,7 +2,6 @@ begin
   require 'filemagic'
 rescue LoadError => e
   # OK, we do not have filemagick, no worries
-  puts "We were unable to find “filemagick,” will use simple file guessing [#{e.message}]."
 end
 
 require 'axlsx'
