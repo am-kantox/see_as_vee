@@ -94,7 +94,7 @@ module SeeAsVee
     end
 
     def str_to_sym str
-      str.is_a?(Symbol) ? str : str.downcase.gsub(/\W/, '_').to_sym
+      str.is_a?(Symbol) ? str : squish(str).downcase.gsub(/\W/, '_').to_sym
     end
 
     def plough_row row
@@ -133,6 +133,13 @@ module SeeAsVee
           lem: params.delete(:leave_error_marker) { LEAVE_ERROR_MARKER } },
         { name: WORK_SHEET_NAME }.merge(params)
       ]
+    end
+
+    def squish str
+      str.
+        gsub(/\A[[:space:]]+/, '').
+        gsub(/[[:space:]]+\z/, '').
+        gsub(/[[:space:]]+/, ' ')
     end
   end
 end
