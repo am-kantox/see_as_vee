@@ -39,7 +39,7 @@ describe SeeAsVee do
         ],
         [
           [
-            "Reference", " Parent", "User", "Trade Date", "Status", "Legal Entity",
+            "Reference", " Parent", "User", "Trade  Date", "Status", "Legal Entity",
             "Counterpart ", "Product", "Action", "Currency 1", "Currency 2",
             "Notional", "Notional Currency", "Effective Period", "Effective Date",
             "Maturity Period", "Maturity Date", "Limit / Strike", "Quote", "Order",
