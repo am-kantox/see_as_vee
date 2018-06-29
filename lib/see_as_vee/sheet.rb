@@ -14,12 +14,14 @@ module SeeAsVee
 
     attr_reader :rows, :formatters, :checkers
 
-    def initialize whatever, formatters: {}, checkers: {}
+    def initialize whatever, formatters: {}, checkers: {}, skip_blank_rows: false
       @formatters = formatters.map { |k, v| [str_to_sym(k), v] }.to_h
       @checkers = checkers.map { |k, v| [str_to_sym(k), v] }.to_h
       @rows = whatever.is_a?(Array) ? whatever : Helpers.harvest_csv(whatever)
 
-      @rows = @rows.map.with_index do |row, idx|
+      @rows = @rows.map do |row|
+        row unless skip_blank_rows && row.compact.empty?
+      end.compact.map.with_index do |row, idx|
         idx.zero? ? row : plough_row(row)
       end
     end

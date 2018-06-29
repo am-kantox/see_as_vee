@@ -37,7 +37,8 @@ Or install it yourself as:
     sheet = SeeAsVee.harvest(
       'spec/fixtures/velocity.xlsx', # file exists ⇒ will be loaded
       formatters: { reference: ->(v) { v.round.to_s } }, # safe reference input
-      checkers: { reference: ->(v) { v.nil? } } # must be present
+      checkers: { reference: ->(v) { v.nil? } }, # must be present
+      skip_blank_rows: true # Optional, defaults to false
     ) do |idx, errors, hash| # row index, errors, row as hash { header: value }
       # Errors: {"Reference"=>"☣2̶4̶3̶7̶2̶3̶1̶1̶4̶"}
       expect(errors["Reference"]).to eq "#{SeeAsVee::Sheet::CELL_ERROR_MARKER}2̶4̶3̶7̶2̶3̶1̶1̶4̶"
@@ -124,6 +125,8 @@ From the version `0.4.5` we support expanding the column produced by `GROUP_CONC
 ```
 
 ## Changelog
+
+### `0.5.1` _`skip_blank_rows`_
 
 ### `0.5.0` supporting all versions of `dry-validation`
 

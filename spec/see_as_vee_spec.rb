@@ -66,6 +66,34 @@ describe SeeAsVee do
     # rubocop:enable Style/NumericLiterals
   end
 
+  it 'skips blank rows with option' do
+    # rubocop:disable Style/NumericLiterals
+    SeeAsVee.harvest(
+      'spec/fixtures/velocity_with_blank_lines.csv', skip_blank_rows: true
+    ) do |idx, errors, hash|
+      expect(hash.to_a.transpose).to eq(
+        [
+          [
+            "Reference", " Parent", "User", "Trade  Date", "Status", "Legal Entity",
+            "Counterpart ", "Product", "Action", "Currency 1", "Currency 2",
+            "Notional", "Notional Currency", "Effective Period", "Effective Date",
+            "Maturity Period", "Maturity Date", "Limit / Strike", "Quote", "Order",
+            "Type", "Fiduciary", "Expiry", "Spot Rate", "Near Points", "Near Forward Rate",
+            "Far Points", "Far Forward Rate", "USI/UTI", "Far Leg USI/UTI", "Kantox", "Counter Value"
+          ],
+          [
+            "243723114", nil, "KANTOX.Алексей", "04.03.2016 10:30:45.391", "EXEC", "Kantox",
+            "VELOCITY TRADE", "Forward", "Buy", "GBP", "EUR", "4557210.31", "GBP",
+            "TOMORROW", "07-Mar-16", "TOMORROW", "07-Mar-16", nil, "1.289802", "NO",
+            "Standard Request For Quote", "NO", "04/03/2016 10:31", "1.28977", "0.32",
+            "1.289802", nil, nil, "1.01E+018", nil, "O-Y7CFVBWAB", "5881079.91"
+          ]
+        ]
+      )
+    end
+    # rubocop:enable Style/NumericLiterals
+  end
+
   it "loads csv into sheet properly" do
     sheet = SeeAsVee::Sheet.new 'spec/fixtures/velocity.xlsx', formatters: { reference: ->(v) { v.round.to_s } }
     sheet.each do |idx, errors, hash|

@@ -25,8 +25,8 @@ require 'see_as_vee/sheet'
 require 'see_as_vee/producers/hashes'
 
 module SeeAsVee
-  def harvest whatever, formatters: {}, checkers: {}
-    sheet = SeeAsVee::Sheet.new whatever, formatters: formatters, checkers: checkers
+  def harvest whatever, formatters: {}, checkers: {}, skip_blank_rows: false
+    sheet = SeeAsVee::Sheet.new whatever, formatters: formatters, checkers: checkers, skip_blank_rows: skip_blank_rows
     return sheet.each unless block_given?
 
     sheet.each(&Proc.new)
@@ -51,7 +51,7 @@ module SeeAsVee
 end
 
 class String
-  def harvest_csv formatters: {}, checkers: {}
-    SeeAsVee.harvest self, formatters: formatters, checkers: checkers
+  def harvest_csv formatters: {}, checkers: {}, skip_blank_rows: false
+    SeeAsVee.harvest self, formatters: formatters, checkers: checkers, skip_blank_rows: skip_blank_rows
   end
 end
