@@ -31,7 +31,7 @@ module SeeAsVee
     end
 
     def headers symbolic = false
-      symbolic ? @rows.first.each_with_index.map { |s, ind| str_to_sym(s || "col #{ind}") } : @rows.first
+      symbolic ? @rows.first.map.with_index { |s, ind| str_to_sym(s || "col #{ind}") } : @rows.first
     end
 
     def [] index, key = nil
