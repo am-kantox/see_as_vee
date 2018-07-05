@@ -126,6 +126,8 @@ From the version `0.4.5` we support expanding the column produced by `GROUP_CONC
 
 ## Changelog
 
+### `0.5.2` accept empty headers
+
 ### `0.5.1` _`skip_blank_rows`_
 
 ### `0.5.0` supporting all versions of `dry-validation`
