@@ -110,6 +110,11 @@ describe SeeAsVee do
     expect(sheet.to_a.map(&:last).map(&:keys).first.grep(/Foo Bar/).count).to be > 1
   end
 
+  it "handles empty headers properly" do
+    sheet = SeeAsVee.harvest('spec/fixtures/empty_headers.csv', checkers: { foo: ->(v) { v == "blah" } })
+    expect(sheet.to_a.last[2]).not_to be_empty
+  end
+
   it "places “danger” sign when checkers do not pass" do
     sheet = SeeAsVee::Sheet.new 'spec/fixtures/velocity.xlsx', checkers: { reference: ->(v) { v == v.round.to_s } }
     sheet.each do |idx, errors, hash|

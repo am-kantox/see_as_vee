@@ -145,6 +145,8 @@ module SeeAsVee
     end
 
     def squish str
+      return str unless str.is_a?(String)
+
       str.
         gsub(/\A[[:space:]]+/, '').
         gsub(/[[:space:]]+\z/, '').
