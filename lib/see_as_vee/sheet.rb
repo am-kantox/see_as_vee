@@ -31,7 +31,14 @@ module SeeAsVee
     end
 
     def headers symbolic = false
-      symbolic ? @rows.first.map.with_index { |s, ind| str_to_sym(s || "col #{ind}") } : @rows.first
+      headers = @rows.first
+      unless headers.uniq.length == headers.length
+        groups = headers.group_by { |h| h }.select { |_, group| group.size > 1 }
+        headers = headers.map.with_index { |e, idx| groups[e].nil? ? e : "#{e} #{idx}" }
+      end
+
+      headers = headers.map.with_index { |s, ind| str_to_sym(s || "col #{ind}") } if symbolic
+      headers
     end
 
     def [] index, key = nil

@@ -104,6 +104,12 @@ describe SeeAsVee do
     end
   end
 
+  it "handles duplicate headers properly" do
+    sheet = SeeAsVee.harvest 'spec/fixtures/duplicate_headers.csv'
+    expect(sheet.map { |_, _, hash| hash.count }).to match_array(sheet.each{}.map(&:count)) # 4
+    expect(sheet.to_a.map(&:last).map(&:keys).first.grep(/Foo Bar/).count).to be > 1
+  end
+
   it "places “danger” sign when checkers do not pass" do
     sheet = SeeAsVee::Sheet.new 'spec/fixtures/velocity.xlsx', checkers: { reference: ->(v) { v == v.round.to_s } }
     sheet.each do |idx, errors, hash|
