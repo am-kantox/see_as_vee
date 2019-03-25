@@ -29,7 +29,7 @@ module SeeAsVee
 
     module Privates
       FILE_TYPE = {
-        /\A(Microsoft OOXML)/ => :xlsx,
+        /\A(Microsoft OOXML|Zip archive data)/ => :xlsx,
         /\A(UTF-8 Unicode|ASCII) text/ => :csv
       }.freeze
 
