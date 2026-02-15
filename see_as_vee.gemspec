@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rubyzip', '~> 2.4'
   # spec.add_dependency 'ruby-filemagic', require: false
 
-  spec.add_development_dependency 'bundler', '> 2.3.0'
+  spec.add_development_dependency 'bundler'
   if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.0.0')
     spec.add_development_dependency 'rake', '> 13.0'
   else
