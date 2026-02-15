@@ -37,6 +37,13 @@ Gem::Specification.new do |spec|
   end
   spec.add_dependency 'rubyzip', '~> 2.4'
   # spec.add_dependency 'ruby-filemagic', require: false
+  if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.7.0')
+    spec.add_dependency 'dry-validation', '~> 1.0'
+    spec.add_dependency 'dry-configurable', '~> 1.0'
+  else
+    spec.add_dependency 'dry-validation', '~> 0.9'
+    spec.add_dependency 'dry-configurable', '~> 0.9'
+  end
 
   spec.add_development_dependency 'bundler'
   if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.0.0')
@@ -47,11 +54,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'awesome_print'
-  # TODO: There are some issues with dry gems versions for some ruby versions
-  # and specs failing
-  # This needs to updated and sanitized
-  spec.add_development_dependency 'dry-validation', '~> 1.0'
-  spec.add_development_dependency 'dry-configurable', '~> 1.0'
 
   # spec.add_development_dependency 'codeclimate-test-reporter'
   # spec.add_development_dependency 'simplecov', '~> 0.12.0'
