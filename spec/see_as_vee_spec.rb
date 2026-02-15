@@ -145,7 +145,14 @@ describe SeeAsVee do
   end
 
   it "applies schema as checker" do
-    m = %w[Params Form].detect(&Dry::Schema.method(:respond_to?))
+    dry_class =
+      if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.7.0')
+        Dry::Schema
+      else
+        Dry::Validation
+      end
+
+    m = %w[Params Form].detect(&dry_class.method(:respond_to?))
     expect(m).not_to be_nil
 
     # To properly validate _all_ values, we need transformer plugged in
@@ -158,7 +165,7 @@ describe SeeAsVee do
     #   :near_forward_rate=>["must be a float"]  # "1.289802"
     # }
 
-    schema = Dry::Schema.public_send(m) do
+    schema = dry_class.public_send(m) do
       required(:reference) { filled? > str? }
       required(:parent).value(:empty?)
       required(:user).filled(:str?)
