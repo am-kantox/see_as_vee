@@ -38,11 +38,11 @@ module SeeAsVee
     /\A(CSV|UTF-8 Unicode|ASCII) text/ => :csv
   }
 
-  def harvest whatever, formatters: {}, checkers: {}, skip_blank_rows: false
+  def harvest whatever, formatters: {}, checkers: {}, skip_blank_rows: false, &cb
     sheet = SeeAsVee::Sheet.new whatever, formatters: formatters, checkers: checkers, skip_blank_rows: skip_blank_rows
     return sheet.each unless block_given?
 
-    sheet.each(&Proc.new)
+    sheet.each(&cb)
     sheet
   end
   module_function :harvest

@@ -81,7 +81,7 @@ module SeeAsVee
 
       Tempfile.open(['see_as_vee', '.csv']).tap do |f|
         content =
-          CSV.generate(params) do |csv|
+          CSV.generate(**params) do |csv|
             @rows.each { |row| csv << row }
           end
         content =
