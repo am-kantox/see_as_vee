@@ -41,8 +41,8 @@ Gem::Specification.new do |spec|
     spec.add_dependency 'dry-validation', '~> 1.0'
     spec.add_dependency 'dry-configurable', '~> 1.0'
   else
-    spec.add_dependency 'dry-validation', '~> 0.9'
-    spec.add_dependency 'dry-configurable', '~> 0.9'
+    spec.add_dependency 'dry-validation', '~> 0.9.0'
+    spec.add_dependency 'dry-configurable', '~> 0.9.0'
   end
 
   spec.add_development_dependency 'bundler'
